@@ -1,0 +1,48 @@
+.containerCustom {
+    padding: 50px;
+}
+
+.formSearch {
+    height: 135px;
+    background-color: #000;
+    margin-bottom: 20px;
+    color: #FFF;
+    padding: 10px 20px;
+}
+
+.labelSearch {
+    font-size: 20px;
+    font-weight: 300;
+}
+
+.containerList {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.iconSearch {
+    background-color: #e35210;
+    color: #fff;
+}
+
+.guideSearch {
+    background-color:#4dad5b;
+    padding: 5px 20px 20px;
+    background-clip: padding-box;
+    border-radius: 5px;
+}
+
+.items {
+    width: 22%;
+    margin: 30px 10px;
+}
+
+.infItems {
+    padding: 2px 15px;
+}
+
+.textAlignCenter {
+    text-align: center;
+}
