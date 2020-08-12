@@ -1,54 +1,156 @@
-.formSearch {
-    height: 135px;
-    background-color: #000;
-    margin-bottom: 20px;
-    margin-top: 20px;
-    color: #FFF;
-    padding: 10px 20px;
+.form-search {
+  background-color: #000;
+  margin-bottom: 50px;
+  margin-top: 20px;
+  margin-left: 70px;
+  margin-right: 70px;
+  color: #fff;
+  padding: 10px 20px;
 }
 
-.labelSearch {
-    font-size: 20px;
-    font-weight: 300;
+.form-group-search {
+  margin-bottom: 0em;
 }
 
-.containerList {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    margin-bottom: 20px;
+.form-group-item {
+  padding: 0 5px;
+}
+
+.label-search {
+  font-size: 20px;
+  font-weight: 300;
+}
+
+.containe-load {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.text-search {
+  font-size: 10px;
 }
 
 .iconSearch {
-    background-color: #e35210;
-    color: #fff;
+  background-color: #e35210;
+  color: #fff;
 }
 
-.guideSearch {
-    background-color:#4dad5b;
-    padding: 5px 20px 20px;
-    background-clip: padding-box;
-    border-radius: 5px;
+.guide-search {
+  background-color: #4dad5b;
+  padding: 10px;
+  padding-bottom: 20px;
+  margin-top: 10px;
+  background-clip: padding-box;
+  border-radius: 5px;
+  font-size: 12px;
 }
 
-.items {
-    width: 22%;
-    margin: 20px 5px;
+.btn-type {
+  text-align: center;
+  margin-right: 5px;
+  border-radius: 2px;
+  font-size: 8px;
+  width: 40%;
 }
 
-.infItems {
-    padding: 2px 15px;
+.btn-load {
+  background: #66ccff;
+  border: none;
+  margin: 20px;
+  font-size: 14px;
 }
 
-.textAlignCenter {
-    text-align: center;
+.item-display {
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
-.btnType {
-    text-align: center;
-    margin-right: 5px;
-    border-radius: 5px;
-    font-size: 8px;
-    display: inline-block;
-    width: 40%;
+.item-name {
+  font-weight: 500;
+}
+
+.item-number {
+  font-size: 8px;
+  color: grey;
+  font-weight: 600;
+  font-family: monospace;
+}
+
+.item-row {
+  margin: 0;
+  margin-bottom: 5px;
+}
+
+.background-grass {
+  background: #9ccc4f;
+}
+
+.background-normal {
+  background-color: #a4abaf;
+}
+
+.background-fire {
+  background-color: #ff4422;
+}
+
+.background-water {
+  background-color: #3399ff;
+}
+
+.background-electric {
+  background-color: #efd634;
+}
+
+.background-ice {
+  background-color: #66ccff;
+}
+
+.background-fighting {
+  background-color: #bb5544;
+}
+
+.background-poison {
+  background-color: #b97fc9;
+  color: #fff;
+}
+
+.background-ground {
+  background-color: #ddbb55;
+}
+
+.background-psychic {
+  background-color: #ff5599;
+}
+
+.background-bug {
+  background-color: #719e3e;
+  color: #fff;
+}
+
+.background-rock {
+  background-color: #bbaa66;
+}
+
+.background-ghost {
+  background-color: #6666bb;
+}
+
+.background-dragon {
+  background-color: #7766ee;
+}
+
+.background-dark {
+  background-color: #775544;
+}
+
+.background-steel {
+  background-color: #aaaabb;
+}
+
+.background-fairy {
+  background-color: #ee99ee;
+}
+
+.background-flying {
+  background: linear-gradient(180deg, #45a1df 50%, #a1a3a5 50%);
 }
