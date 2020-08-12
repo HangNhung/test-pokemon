@@ -72,7 +72,10 @@ function App() {
             <InputGroup className="mb-2">
               <FormControl value={searchText} onChange={handleSearchChange} />
               <InputGroup.Append type="submit">
-                <InputGroup.Text className="iconSearch">
+                <InputGroup.Text
+                  className="iconSearch"
+                  onClick={onSearchSubmit}
+                >
                   <FontAwesomeIcon icon={faSearch} />
                 </InputGroup.Text>
               </InputGroup.Append>
