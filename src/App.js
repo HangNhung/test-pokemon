@@ -18,21 +18,39 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import CustomButton from './components/CustomButtonComponent';
 
 function App() {
+    const [dataSample, setDataSample] = useState([]);
     const [data, setData] = useState([]);
+    const [size, setSize] = useState(8);
+    const [searchText, setSearch] = useState('');
+    const [isSearch, setCallSearch] = useState(false);
 
-    useEffect(() => {
-        const fetchData = async () => {
-          const result = await axios(
-            '/pokedex/kalos',
-          );
-          
-          const resultSmall = result.data.slice(0, 8);
-          console.log('a', resultSmall)
-          setData(resultSmall);
-        };
-       
-        fetchData()
-      }, []);
+        useEffect(() => {
+
+            const fetchData = async () => {
+                const result = await axios('pokedex/kalos');
+                
+            setDataSample(result.data)
+            const resultSmall = result.data.slice(0, size);
+            setData(resultSmall)
+            
+            // if (isSearch) {
+            //     const resultSearch = dataSample.filter(element => element.number == searchText 
+            //             || element.name == searchText);
+            //     setData(resultSearch)
+            //     setCallSearch(false)
+            // }  
+        }
+            fetchData()
+        }, [size, isSearch]);
+
+        const handleSearchChange = event => {
+            setSearch(event.target.value);
+        }
+
+        const callSearchFunction = event => {
+            event.preventDefault();
+            setCallSearch(true)
+        }
 
     return (
         <div className="container containerCustom">
@@ -44,8 +62,11 @@ function App() {
                                 Name or Number
                             </Form.Label>
                             <InputGroup className="mb-2">
-                                <FormControl/>
-                                <InputGroup.Append>
+                                <FormControl 
+                                    value={searchText} 
+                                    onChange={handleSearchChange}
+                                />
+                                <InputGroup.Append onClick={callSearchFunction} type="submit">
                                     <InputGroup.Text  className="iconSearch">
                                         <FontAwesomeIcon icon={faSearch} />
                                     </InputGroup.Text>
@@ -71,7 +92,7 @@ function App() {
                     <span className="items" key={index}>
                         <Image src={item.ThumbnailImage} thumbnail />
                         <div className="infItems">
-                            <h6>#{item.id}</h6>
+                            <h6>#{item.number}</h6>
                             <h5>{item.name}</h5>
                             {
                                 item.type.map(type =>
@@ -84,7 +105,9 @@ function App() {
                 }
             </Container>
             <Container className="textAlignCenter">
-                <Button variant="primary">
+                <Button variant="primary" onClick={() => 
+                    setSize(size + 8)
+                    }>
                     Load more Pokémon
                 </Button>
             </Container>
