@@ -18,39 +18,50 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import CustomButton from './components/CustomButtonComponent';
 
 function App() {
-    const [dataSample, setDataSample] = useState([]);
     const [data, setData] = useState([]);
+    const [dataToDisplay, setDataToDisplay] = useState([]);
     const [size, setSize] = useState(8);
     const [searchText, setSearch] = useState('');
     const [isSearch, setCallSearch] = useState(false);
 
-        useEffect(() => {
+    useEffect(() => {
+        const fetchData = async () => {
+        const result = await axios('pokedex/kalos');
 
-            const fetchData = async () => {
-                const result = await axios('pokedex/kalos');
-                
-            setDataSample(result.data)
-            const resultSmall = result.data.slice(0, size);
-            setData(resultSmall)
-            
-            // if (isSearch) {
-            //     const resultSearch = dataSample.filter(element => element.number == searchText 
-            //             || element.name == searchText);
-            //     setData(resultSearch)
-            //     setCallSearch(false)
-            // }  
+        setData(result.data)
+        setDataToDisplay(result.data.slice(0, size))
         }
-            fetchData()
-        }, [size, isSearch]);
+        fetchData()
+    }, []);
 
-        const handleSearchChange = event => {
-            setSearch(event.target.value);
-        }
+    useEffect(() => {
+        setDataToDisplay(data.slice(0, size))
+    }, [size]);
 
-        const callSearchFunction = event => {
-            event.preventDefault();
-            setCallSearch(true)
-        }
+    useEffect(() => {
+        const resultsSearch = data.filter(entry =>
+            entry.name.includes(searchText)
+            || entry.number.includes(searchText));
+
+        setDataToDisplay(resultsSearch)
+    }, [searchText]);
+
+    const handleSearchChange = event => {
+        setSearch(event.target.value);
+    }
+
+    const callSearchFunction = event => {
+        event.preventDefault();
+        setCallSearch(true)
+    }
+
+    if (isSearch) {
+        const resultsSearch = data.filter(entry => entry.name.includes(searchText) 
+                                            || entry.number.includes(searchText));
+
+        setDataToDisplay(resultsSearch)
+        setCallSearch(false)
+    }
 
     return (
         <div className="container containerCustom">
@@ -88,7 +99,7 @@ function App() {
 
             <Container className="containerList">
                 {
-                    data.map((item, index) => 
+                    dataToDisplay.map((item, index) => 
                     <span className="items" key={index}>
                         <Image src={item.ThumbnailImage} thumbnail />
                         <div className="infItems">
