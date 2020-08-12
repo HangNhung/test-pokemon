@@ -19,54 +19,49 @@ import CustomButton from './components/CustomButtonComponent';
 
 function App() {
     const [data, setData] = useState([]);
-    const [dataToDisplay, setDataToDisplay] = useState([]);
     const [size, setSize] = useState(8);
-    const [searchText, setSearch] = useState('');
-    const [isSearch, setCallSearch] = useState(false);
+    
+    const [searchResult, setSearchResult] = useState([]);
+    const [searchText, setSearchText] = useState('');
+    const [isSearching, setIsSearching] = useState(false);
+
+    const handleSearchChange = event => {
+        setSearchText(event.target.value);
+    }
+
+    const onSearchSubmit = event => {
+        event.preventDefault();
+        setIsSearching(true);
+    }
 
     useEffect(() => {
         const fetchData = async () => {
-        const result = await axios('pokedex/kalos');
+            const result = await axios('pokedex/kalos');
 
-        setData(result.data)
-        setDataToDisplay(result.data.slice(0, size))
+            setData(result.data);
         }
-        fetchData()
+
+        fetchData();
     }, []);
 
     useEffect(() => {
-        setDataToDisplay(data.slice(0, size))
-    }, [size]);
+        if (isSearching) {
+            const pattern = new RegExp(searchText, 'gi');
+            const searchResult = data.filter(entry =>
+                entry.name.match(pattern)
+                || entry.number.match(pattern));
+    
+            setSearchResult(searchResult);
+            setIsSearching(false);
+        }
+    }, [searchText, isSearching]);
 
-    useEffect(() => {
-        const resultsSearch = data.filter(entry =>
-            entry.name.includes(searchText)
-            || entry.number.includes(searchText));
-
-        setDataToDisplay(resultsSearch)
-    }, [searchText]);
-
-    const handleSearchChange = event => {
-        setSearch(event.target.value);
-    }
-
-    const callSearchFunction = event => {
-        event.preventDefault();
-        setCallSearch(true)
-    }
-
-    if (isSearch) {
-        const resultsSearch = data.filter(entry => entry.name.includes(searchText) 
-                                            || entry.number.includes(searchText));
-
-        setDataToDisplay(resultsSearch)
-        setCallSearch(false)
-    }
+    const dataToDisplay = searchResult.length > 0 ? searchResult.slice(0, size) : data.slice(0, size);
 
     return (
         <div className="container containerCustom">
             <Container>
-                <Form className="formSearch">
+                <Form className="formSearch" onSubmit={onSearchSubmit}>
                     <Form.Group as={Row} controlId="formSearch">
                         <Col sm="6">
                             <Form.Label className="labelSearch">
@@ -77,7 +72,7 @@ function App() {
                                     value={searchText} 
                                     onChange={handleSearchChange}
                                 />
-                                <InputGroup.Append onClick={callSearchFunction} type="submit">
+                                <InputGroup.Append type="submit">
                                     <InputGroup.Text  className="iconSearch">
                                         <FontAwesomeIcon icon={faSearch} />
                                     </InputGroup.Text>
