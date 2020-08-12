@@ -6,8 +6,7 @@ function CustomButton(props) {
     const renderType = typePokemon.find(element =>  element.type == type.toLowerCase());
     
     return (
-        <span
-            style={{textAlign: 'center', width: '70px', background: `${renderType.color}`, display:'inline-block', marginRight:'5px', borderRadius: '5px'}}
+        <span className="btnType" style={{background: `${renderType.color}`}}
             >
                 {renderType.type.charAt(0).toUpperCase()}{renderType.type.slice(1)}
         </span>

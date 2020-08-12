@@ -1,11 +1,8 @@
-.containerCustom {
-    padding: 50px;
-}
-
 .formSearch {
     height: 135px;
     background-color: #000;
     margin-bottom: 20px;
+    margin-top: 20px;
     color: #FFF;
     padding: 10px 20px;
 }
@@ -36,7 +33,7 @@
 
 .items {
     width: 22%;
-    margin: 30px 10px;
+    margin: 20px 5px;
 }
 
 .infItems {
@@ -45,4 +42,13 @@
 
 .textAlignCenter {
     text-align: center;
+}
+
+.btnType {
+    text-align: center;
+    margin-right: 5px;
+    border-radius: 5px;
+    font-size: 8px;
+    display: inline-block;
+    width: 40%;
 }

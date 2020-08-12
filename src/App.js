@@ -69,7 +69,7 @@ function App() {
     ];
 
     return (
-        <div className="container containerCustom">
+        <div className="container">
             <Container>
                 <Form className="formSearch">
                     <Form.Group as={Row} controlId="formSearch">
