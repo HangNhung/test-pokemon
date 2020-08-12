@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from 'axios';
 import './styles/style.css';
 // import logo from "./logo.svg";
 import "./App.css";
@@ -17,69 +18,61 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import CustomButton from './components/CustomButtonComponent';
 
 function App() {
-    const data = [
-        {
-            id: '#002',
-            name: 'Ivysaur',
-            imageUrl: 'https://assets.pokemon.com/assets/cms2/img/pokedex/detail/001.png',
-            types: ['Grass', 'Poison']
-        },
-        {
-            id: '#012888888',
-            name: 'Butterfree',
-            imageUrl: 'https://assets.pokemon.com/assets/cms2/img/pokedex/detail/001.png',
-            types: ['Bug', 'Flying']
-        },
-        {
-            id: '#02088888',
-            name: 'Raticate',
-            imageUrl: 'https://assets.pokemon.com/assets/cms2/img/pokedex/detail/001.png',
-            types: ['Normal']
-        },
-        {
-            id: '#00288',
-            name: 'Ivysaur',
-            imageUrl: 'https://assets.pokemon.com/assets/cms2/img/pokedex/detail/001.png',
-            types: ['Grass', 'Poison']
-        },
-        {
-            id: '#0188',
-            name: 'Butterfree',
-            imageUrl: 'https://assets.pokemon.com/assets/cms2/img/pokedex/detail/001.png',
-            types: ['Bug', 'Flying']
-        },
-        {
-            id: '#023',
-            name: 'Raticate',
-            imageUrl: 'https://assets.pokemon.com/assets/cms2/img/pokedex/detail/001.png',
-            types: ['Normal']
-        },
-        {
-            id: '#011',
-            name: 'Butterfree',
-            imageUrl: 'https://assets.pokemon.com/assets/cms2/img/pokedex/detail/001.png',
-            types: ['Bug', 'Flying']
-        },
-        {
-            id: '#021',
-            name: 'Raticate',
-            imageUrl: 'https://assets.pokemon.com/assets/cms2/img/pokedex/detail/001.png',
-            types: ['Normal']
+    const [data, setData] = useState([]);
+    const [size, setSize] = useState(8);
+    
+    const [searchResult, setSearchResult] = useState([]);
+    const [searchText, setSearchText] = useState('');
+    const [isSearching, setIsSearching] = useState(false);
+
+    const handleSearchChange = event => {
+        setSearchText(event.target.value);
+    }
+
+    const onSearchSubmit = event => {
+        event.preventDefault();
+        setIsSearching(true);
+    }
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const result = await axios('pokedex/kalos');
+
+            setData(result.data);
         }
-    ];
+
+        fetchData();
+    }, []);
+
+    useEffect(() => {
+        if (isSearching) {
+            const pattern = new RegExp(searchText, 'gi');
+            const searchResult = data.filter(entry =>
+                entry.name.match(pattern)
+                || entry.number.match(pattern));
+    
+            setSearchResult(searchResult);
+            setIsSearching(false);
+        }
+    }, [searchText, isSearching]);
+
+    const dataToDisplay = searchResult.length > 0 ? searchResult.slice(0, size) : data.slice(0, size);
 
     return (
         <div className="container">
             <Container>
-                <Form className="formSearch">
+                <Form className="formSearch" onSubmit={onSearchSubmit}>
                     <Form.Group as={Row} controlId="formSearch">
                         <Col sm="6">
                             <Form.Label className="labelSearch">
                                 Name or Number
                             </Form.Label>
                             <InputGroup className="mb-2">
-                                <FormControl/>
-                                <InputGroup.Append>
+                                <FormControl 
+                                    value={searchText} 
+                                    onChange={handleSearchChange}
+                                />
+                                <InputGroup.Append type="submit">
                                     <InputGroup.Text  className="iconSearch">
                                         <FontAwesomeIcon icon={faSearch} />
                                     </InputGroup.Text>
@@ -101,24 +94,26 @@ function App() {
 
             <Container className="containerList">
                 {
-                    data.map(items => 
-                    <div className="items" key={items.id}>
-                        <Image src={items.imageUrl} thumbnail />
+                    dataToDisplay.map((item, index) => 
+                    <span className="items" key={index}>
+                        <Image src={item.ThumbnailImage} thumbnail />
                         <div className="infItems">
-                            <h6>{items.id}</h6>
-                            <h5>{items.name}</h5>
+                            <h6>#{item.number}</h6>
+                            <h5>{item.name}</h5>
                             {
-                                items.types.map(type =>
+                                item.type.map(type =>
                                     <CustomButton type = {type}/>
                                 )
                             }
                         </div>
-                    </div>
+                    </span>
                     )
                 }
             </Container>
             <Container className="textAlignCenter">
-                <Button variant="primary">
+                <Button variant="primary" onClick={() => 
+                    setSize(size + 8)
+                    }>
                     Load more Pokémon
                 </Button>
             </Container>
