@@ -67,7 +67,7 @@ function App() {
           controlId="formSearch"
           className="form-group-search"
         >
-          <Col xs="6">
+          <Col xs={12} sm={8} md={6} lg={6} xl={6}>
             <Form.Label className="label-search">Name or Number</Form.Label>
             <InputGroup className="mb-2">
               <FormControl value={searchText} onChange={handleSearchChange} />
@@ -85,7 +85,7 @@ function App() {
               Ability, and more!
             </Form.Text>
           </Col>
-          <Col xs="6">
+          <Col xs={12} sm={4} md={6} lg={6} xl={6}>
             <Form.Label className="guide-search">
               Search for a Pokémon by name or using its National Pokédev number.
             </Form.Label>
@@ -96,9 +96,9 @@ function App() {
       <Container className="containerList">
         <Row>
           {dataToDisplay.map((item, index) => (
-            <Col className="item-display" xs={3} md={3} lg={3}>
-              <Image src={item.ThumbnailImage} thumbnail />
+            <Col className="item-display" xs={12} sm={6} md={3} lg={3} xl={2}>
               <Form.Group className="form-group-item">
+                <Image src={item.ThumbnailImage} thumbnail />
                 <Form.Text className="item-number">#{item.number}</Form.Text>
                 <Form.Text className="item-name">{item.name}</Form.Text>
                 <Row className="item-row">
