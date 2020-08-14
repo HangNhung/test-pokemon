@@ -12,6 +12,7 @@
 .form-group-item {
   padding: 0 5px;
   margin: auto;
+  margin-bottom: 20px;
 }
 
 .label-search {
@@ -47,7 +48,7 @@
   text-align: center;
   margin-right: 5px;
   border-radius: 2px;
-  font-size: 8px;
+  font-size: 12px;
   width: 40%;
 }
 
@@ -64,18 +65,26 @@
 
 .item-name {
   font-weight: 500;
+  font-size: 16px;
 }
 
 .item-number {
-  font-size: 8px;
+  font-size: 10px;
   color: grey;
   font-weight: 600;
   font-family: monospace;
 }
 
+.row {
+  margin: auto 10px;
+}
+
 .item-row {
-  margin: 0;
-  margin-bottom: 5px;
+  margin-left: 0;
+}
+
+.img-thumbnail {
+  width: 100%;
 }
 
 .background-grass {
