@@ -1,0 +1,6 @@
+[[redirects]]
+  from = "/pokedex/kalos"
+  to = "https://www.pokemon.com/us/api/pokedex/kalos"
+  status = 200
+  force = true
+  headers = {X-From = "Netlify"}

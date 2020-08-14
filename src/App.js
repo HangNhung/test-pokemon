@@ -35,7 +35,7 @@ function App() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios("pokedex/kalos");
+      const result = await axios("/pokedex/kalos");
 
       setData(result.data);
     };
