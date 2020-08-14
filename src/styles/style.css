@@ -1,7 +1,7 @@
 .form-search {
   background-color: #000;
   color: #fff;
-  margin: 40px 50px;
+  margin: 40px auto;
   padding: 10px 20px;
 }
 
@@ -11,6 +11,7 @@
 
 .form-group-item {
   padding: 0 5px;
+  margin: auto;
 }
 
 .label-search {
@@ -18,16 +19,16 @@
   font-weight: 300;
 }
 
-.containe-load {
+.container-load {
   text-align: center;
-  margin-bottom: 50px;
+  margin: 40px auto;
 }
 
 .text-search {
   font-size: 10px;
 }
 
-.iconSearch {
+.icon-search {
   background-color: #e35210;
   color: #fff;
 }
@@ -153,13 +154,8 @@
 
 /*responsive design*/
 @media (max-width: 575.98px) {
-  .form-group-item {
-    margin-left: 20vw;
-    margin-right: 20vw;
-  }
-
-  .img-thumbnail {
-    width: 60vw;
+  .item-display {
+    display: flex;
   }
 
   .item-number {
